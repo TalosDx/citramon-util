@@ -10,18 +10,29 @@ public class CollectionUtils
         return collection == null || collection.isEmpty();
     }
     
-    public static <C extends Collection> boolean isNotEmpty(C collection) {
+    public static <C extends Collection> boolean isNotEmpty(C collection)
+    {
         return !isEmpty(collection);
     }
     
-    public static <C extends Collection<TYPE>, TYPE> C requiredNotEmpty(C collection) {
-        if(isEmpty(collection))
+    public static <C extends Collection<TYPE>, TYPE> C removeNulls(C collection)
+    {
+        while (collection.contains(null))
+            collection.remove(null);
+        
+        return collection;
+    }
+    
+    public static <C extends Collection<TYPE>, TYPE> C requiredNotEmpty(C collection)
+    {
+        if (isEmpty(collection))
             throw new IllegalArgumentException("Required collection non null and not empty");
         return collection;
     }
     
-    public static <M extends Map<KEY, VALUE>, KEY, VALUE> M requiredNotEmpty(M map) {
-        if(isEmpty(map))
+    public static <M extends Map<KEY, VALUE>, KEY, VALUE> M requiredNotEmpty(M map)
+    {
+        if (isEmpty(map))
             throw new IllegalArgumentException("Required map non null and not empty");
         return map;
     }
